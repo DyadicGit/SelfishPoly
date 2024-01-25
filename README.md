@@ -50,8 +50,8 @@ npm init -y --scope @poly -w packages/client
 npm init -y --scope @poly -w packages/domain
 
 # binding workspaces
-npm install @poly/domain -w @retro/client
-npm install @poly/domain -w @retro/server
+npm install @poly/domain -w @poly/client
+npm install @poly/domain -w @poly/server
 
 # initialize dependencies
 npm install
