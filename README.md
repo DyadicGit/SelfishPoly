@@ -23,7 +23,7 @@ App architectural ideas:
 - - **D**elete a note.
 
 - FE should have some state manager for CRUD views: Redux (not lib but pattern), React Context, RxJS, ReactQuery, or what you want.  \
-**Try to use less 3rd party libraries as possible**, recreate stuff by yourself just to understand how it all evolved.
+  **Try to use less 3rd party libraries as possible**, recreate stuff by yourself just to understand how it all evolved.
 
 - FE should have a Chat mechanism.
 
@@ -92,15 +92,15 @@ just delete [package-lock.json](package-lock.json),
 this happens because there are entries like this when workspaces are initialized:
 
 ```json lines
-    "node_modules/@poly/server": {
-      "resolved": "packages/server",
-      "link": true
-    },
-    "packages/server": {
-      "name": "@poly/server",
-      "version": "1.0.0",
-      "license": "ISC"
-    }
+"node_modules/@poly/server": {
+  "resolved": "packages/server",
+  "link": true
+},
+"packages/server": {
+  "name": "@poly/server",
+  "version": "1.0.0",
+  "license": "ISC"
+}
 ```
 
 ## Step 2: create FE
@@ -128,10 +128,10 @@ run app like so:: ```npm run start --workspace @poly/client``` OR ```npm start -
 
 **Add this in package.json for future BE to work**
 ```json lines
-  "options": {
-    "allowedHosts": ["localhost", ".localhost"],
-    "proxy": "http://localhost:5000"
-  },
+"options": {
+  "allowedHosts": ["localhost", ".localhost"],
+  "proxy": "http://localhost:5000"
+},
 
 ```
 ## Step 3: create BE
@@ -158,18 +158,18 @@ BUT paste this setup in tsconfig.json
 
 ```json
 {
-  "compilerOptions": {
-    "target": "ES6",
-    "module": "CommonJS",
-    "moduleResolution": "NodeNext",
-    "strict": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "jsx": "react"
-  },
-  "outDir": "./build",
-  "include": ["src"]
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "CommonJS",
+        "moduleResolution": "NodeNext",
+        "strict": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "jsx": "react"
+    },
+    "outDir": "./build",
+    "include": ["src"]
 }
 ```
 
