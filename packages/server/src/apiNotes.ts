@@ -1,19 +1,18 @@
-import express from 'express'
+import express from "express";
 import { databaseNotes } from "./data";
 
-export const apiNotes = express()
+export const apiNotes = express();
 
-apiNotes.get('/api/notes', (req, res) => {
-    res.json(databaseNotes.all());
+apiNotes.get("/api/notes", (req, res) => {
+  res.json(databaseNotes.all());
 });
 
-apiNotes.get('/api/note/:id', (req, res) => {
-    res.json(databaseNotes.get(req.params.id));
+apiNotes.get("/api/note/:id", (req, res) => {
+  res.json(databaseNotes.get(req.params.id));
 });
 
-apiNotes.put('/api/note/:id', (req, res) => {
-    const car = req.body;
+apiNotes.put("/api/note/:id", (req, res) => {
+  const body = req.body;
 
-    res.json(databaseNotes.edit(req.params.id, car));
+  res.json(databaseNotes.edit(req.params.id, body));
 });
-

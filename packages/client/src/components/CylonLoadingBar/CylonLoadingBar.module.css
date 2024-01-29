@@ -1,0 +1,26 @@
+@keyframes flashAnimation {
+    0% { width: 15%; left: 0;}
+    50% { width: 40%; left: 30%; }
+    100% { width: 15%; left: 85%; }
+}
+
+.cylonLoadingBar {
+    z-index: 10;
+    position: fixed;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    height: 4px;
+}
+
+.cylonLoadingBar::before {
+    content: '';
+    display: block;
+    background: linear-gradient(to right, #995d00, #ff9b00, #995d00);
+    position: relative;
+    top: -1px;
+    border-radius: 50% / 40%;
+    height: 6px;
+    animation: flashAnimation 1.5s ease-in-out infinite alternate;
+}

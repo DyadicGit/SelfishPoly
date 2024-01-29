@@ -1,17 +1,29 @@
-import React from 'react';
-import { Note } from "@poly/domain";
-
-const apiGetNotes = (): Promise<Note[]> => fetch('http://localhost:5000/api/notes',).then((res) => res.json());
+import React, { Suspense } from "react";
+import { CylonLoadingBar } from "./components";
+import { useLoadGlobalState } from "./providers/hooks";
+import { useGlobalState } from "./providers/GlobalStateProvider";
+import { ErrorView } from "./components/ErrorView";
 
 function App() {
-    apiGetNotes().then((notes: Note[]) => {console.log('%c /api/notes', 'color: yellow;', notes);})
+  useLoadGlobalState();
+  const globalState = useGlobalState();
+  const { notes, error, isLoading } = globalState;
 
-    return (
-        <main>
-            <h1>SelfishPoly</h1>
-            <code>OPEN DEVTOOLS CONSOLE</code>
-        </main>
-    );
+  if (error) {
+    return <ErrorView />;
+  }
+
+  return (
+    <main>
+      {isLoading && <CylonLoadingBar />}
+      <h1>SelfishPoly</h1>
+      <ul>
+        {notes?.map((note) => (
+          <li>{note.text}</li>
+        ))}
+      </ul>
+    </main>
+  );
 }
 
 export default App;
