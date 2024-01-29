@@ -204,3 +204,21 @@ in [package.json](packages%2Fserver%2Fpackage.json) to "script" section add
 to run server ```npm start -w @poly/server```
 
 ## Step 4: create Domain/Model/Types with Typescript
+create a file where you will store TypeScript types & export them.
+add **tsconfig.json** same as in packages/server
+
+```json
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "CommonJS",
+        "moduleResolution": "NodeNext",
+        "strict": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "jsx": "react"
+    },
+}
+
+```

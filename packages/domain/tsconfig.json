@@ -9,6 +9,4 @@
         "allowSyntheticDefaultImports": true,
         "jsx": "react"
     },
-    "outDir": "./build",
-    "include": ["src"],
 }
