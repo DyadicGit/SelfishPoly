@@ -6,7 +6,7 @@ App architectural ideas:
 
 - Let’s make it share one TypeScript types source between FE & BE
 
-- BE: The Post/Put request have validation, they fail if sent content doesn’t include word “Poly”
+- BE: The Post/Put request have validation, they fail if sent content doesn't include word “Poly”
 
 - BE: Databases can be any, even custom in memory. ~~(for future we can use AWS DynamoDB)~~
 
@@ -224,10 +224,10 @@ add **tsconfig.json** same as in packages/server
 ```
 
 
-# Step X: Play
+## Step X: Play
 start doing stuff you can look for answers in other branches:
 * branch **main** contains only readme.md's files
-* branch **solutions/1-monorepo_finished** has finished monorepo setup finished
+* branch **solutions/1-monorepo_finished** has monorepo setup finished
 * branch **solutions/2-setup-node_react_and_typescript** has a basic reusable @domain, both in express.js @server & FE @client
 
 #### NOTE!
