@@ -222,3 +222,14 @@ add **tsconfig.json** same as in packages/server
 }
 
 ```
+
+
+# Step X: Play
+start doing stuff you can look for answers in other branches:
+* branch **main** contains only readme.md's files
+* branch **solutions/1-monorepo_finished** has finished monorepo setup finished
+* branch **solutions/2-setup-node_react_and_typescript** has a basic reusable @domain, both in express.js @server & FE @client
+
+#### NOTE!
+If you want to start coding FE without above setup, but figure it out on the go, start from branch **solutions/2-setup-node_react_and_typescript**
+
