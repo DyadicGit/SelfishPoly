@@ -1,0 +1,23 @@
+{
+  "name": "selfishpoly",
+  "version": "1.0.0",
+  "description": "The main purpose of creating **SelfishPoly** app is to get familiar with **CRUD** operations, duplex real-time operations with WebSockets,~~and making it serverless~~",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "workspaces": [
+    "packages/server",
+    "packages/client",
+    "packages/domain"
+  ],
+  "devDependencies": {
+    "typescript": "^5.3.3"
+  }
+}
