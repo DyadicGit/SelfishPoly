@@ -16,9 +16,9 @@ App architectural ideas:
 
 - - **C**reate a note,
 
-- - **U**pdate/edit a note,
-
 - - **R**ead single note,
+
+- - **U**pdate/edit a note,
 
 - - **D**elete a note.
 
