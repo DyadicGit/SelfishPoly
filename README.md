@@ -16,9 +16,9 @@ App architectural ideas:
 
 - - **C**reate a note,
 
-- - **U**pdate/edit a note,
-
 - - **R**ead single note,
+
+- - **U**pdate/edit a note,
 
 - - **D**elete a note.
 
@@ -129,9 +129,9 @@ run app like so:: ```npm run start --workspace @poly/client``` OR ```npm start -
 **Add this in package.json for future BE to work**
 ```json lines
   "options": {
-    "allowedHosts": ["localhost", ".localhost"],
-    "proxy": "http://localhost:5000"
-  },
+"allowedHosts": ["localhost", ".localhost"],
+"proxy": "http://localhost:5000"
+},
 
 ```
 ## Step 3: create BE
@@ -158,18 +158,18 @@ BUT paste this setup in tsconfig.json
 
 ```json
 {
-  "compilerOptions": {
-    "target": "ES6",
-    "module": "CommonJS",
-    "moduleResolution": "NodeNext",
-    "strict": true,
-    "resolveJsonModule": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "jsx": "react"
-  },
-  "outDir": "./build",
-  "include": ["src"]
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "CommonJS",
+        "moduleResolution": "NodeNext",
+        "strict": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "jsx": "react"
+    },
+    "outDir": "./build",
+    "include": ["src"]
 }
 ```
 
