@@ -102,8 +102,61 @@ this happens because there are entries like this when workspaces are initialized
       "license": "ISC"
     }
 ```
-## Step 2: create Domain/Model/Types with Typescript
 
-## Step 3: create FE
+## Step 2: create FE
+```
+cd packages\client\
+npx create-react-app my-app --template typescript
+```
+in **packages\client\my-app\package.json** do changes
+```json lines
+{
+    "name": "@poly/client",
+    "dependencies": {
+        // can manually add or with console "npm install @poly/domain -w @poly/client"
+        "@poly/domain": "^1.0.0"
+    },
+}
 
-## Step 4: create BE
+```
+
+move stuff from **packages\client\my-app** folder, to **packages\client\**
+
+install dependencies like so: ```npm install --workspace @poly/client```
+
+run app like so:: ```npm run start --workspace @poly/client``` OR ```npm start -w @poly/client```
+
+**Add this in package.json for future BE to work**
+```json lines
+  "options": {
+    "allowedHosts": ["localhost", ".localhost"],
+    "proxy": "http://localhost:5000"
+  },
+
+```
+## Step 3: create BE
+```
+cd packages/server
+tsc --init
+```
+or paste this setup in tsconfig.json
+```json lines
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "CommonJS",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react"
+  },
+  "outDir": "./build",
+  "include": ["src"]
+}
+```
+````
+
+
+## Step 4: create Domain/Model/Types with Typescript
