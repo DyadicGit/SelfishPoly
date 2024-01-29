@@ -139,8 +139,24 @@ run app like so:: ```npm run start --workspace @poly/client``` OR ```npm start -
 cd packages/server
 tsc --init
 ```
-or paste this setup in tsconfig.json
-```json lines
+P.S. TypeScript tsc --init  generates this
+```json
+{
+    "compilerOptions": {
+        "target": "es2016",
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,
+        "skipLibCheck": true
+    }
+}
+```
+
+
+BUT paste this setup in tsconfig.json
+
+```json
 {
   "compilerOptions": {
     "target": "ES6",
@@ -156,7 +172,35 @@ or paste this setup in tsconfig.json
   "include": ["src"]
 }
 ```
-````
 
+Lets setup express framework and nodemon+ts-node (when developing the server restarts automatically)
+```
+npm install @types/express -w @poly/server --save-dev
+npm install nodemon -w @poly/server --save-dev
+npm install ts-node -w @poly/server --save-dev
+npm install express -w @poly/server
+
+```
+
+nodemon config [nodemon.json](packages%2Fserver%2Fnodemon.json)
+```json
+{
+    "restartable": "rs",
+    "ignore": [ "node_modules", "server-dist" ],
+    "watch": ["./src", "./index.ts"],
+    "ext": "js,json,ts",
+    "execMap": { "ts": "ts-node" },
+    "env": { "NODE_ENV": "development" }
+}
+```
+in [package.json](packages%2Fserver%2Fpackage.json) to "script" section add
+```
+  "scripts": {
+    "start": "nodemon --config ../packages/server/nodemon.json index.ts",
+    "debug": "nodemon --config ../packages/server/nodemon.json --inspect-brk index.ts"
+  },
+```
+
+to run server ```npm start -w @poly/server```
 
 ## Step 4: create Domain/Model/Types with Typescript
