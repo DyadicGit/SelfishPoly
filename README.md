@@ -92,14 +92,14 @@ just delete [package-lock.json](package-lock.json),
 this happens because there are entries like this when workspaces are initialized:
 
 ```json lines
-    "node_modules/@poly/server": {
-"resolved": "packages/server",
-"link": true
+"node_modules/@poly/server": {
+  "resolved": "packages/server",
+  "link": true
 },
 "packages/server": {
-"name": "@poly/server",
-"version": "1.0.0",
-"license": "ISC"
+  "name": "@poly/server",
+  "version": "1.0.0",
+  "license": "ISC"
 }
 ```
 
@@ -128,9 +128,9 @@ run app like so:: ```npm run start --workspace @poly/client``` OR ```npm start -
 
 **Add this in package.json for future BE to work**
 ```json lines
-  "options": {
-"allowedHosts": ["localhost", ".localhost"],
-"proxy": "http://localhost:5000"
+"options": {
+  "allowedHosts": ["localhost", ".localhost"],
+  "proxy": "http://localhost:5000"
 },
 
 ```
