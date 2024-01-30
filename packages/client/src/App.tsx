@@ -32,7 +32,7 @@ function App() {
       <CylonLoadingBar />
       <ul>
         {notes?.map((note) => (
-          <li>{note.text}</li>
+          <li key={note.id}>{note.text}</li>
         ))}
       </ul>
     </Base>
