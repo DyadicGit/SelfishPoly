@@ -1,3 +1,16 @@
-import styles from "./CylonLoadingBar.module.css";
+import styles from "./CylonLoadingBar.module.scss";
+import { useGlobalState } from "../../providers/GlobalStateProvider";
+import { useEffect, useState } from "react";
 
-export const CylonLoadingBar = () => <div className={styles.cylonLoadingBar} />;
+export const CylonLoadingBar = () => {
+  const { isLoading } = useGlobalState();
+  const [show, setShow] = useState(isLoading);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShow(isLoading), 500);
+
+    return () => clearTimeout(timer);
+  }, [isLoading]);
+
+  return show ? <div className={styles.cylonLoadingBar} /> : null;
+};

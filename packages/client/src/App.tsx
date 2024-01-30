@@ -1,8 +1,16 @@
-import React, { Suspense } from "react";
+import React, { FC, ReactNode } from "react";
 import { CylonLoadingBar } from "./components";
 import { useLoadGlobalState } from "./providers/hooks";
 import { useGlobalState } from "./providers/GlobalStateProvider";
 import { ErrorView } from "./components/ErrorView";
+import { SkeletonList } from "./components/Skeletons/Skeletons";
+
+const Base: FC<{ children: ReactNode }> = ({ children }) => (
+  <main>
+    <h1>SelfishPoly</h1>
+    {children}
+  </main>
+);
 
 function App() {
   useLoadGlobalState();
@@ -13,16 +21,23 @@ function App() {
     return <ErrorView />;
   }
 
+  if (isLoading && !notes.length) {
+    return (
+      <Base>
+        <SkeletonList />
+      </Base>
+    );
+  }
+
   return (
-    <main>
-      {isLoading && <CylonLoadingBar />}
-      <h1>SelfishPoly</h1>
+    <Base>
+      <CylonLoadingBar />
       <ul>
         {notes?.map((note) => (
           <li>{note.text}</li>
         ))}
       </ul>
-    </main>
+    </Base>
   );
 }
 
