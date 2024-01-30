@@ -1,9 +1,7 @@
 import React, { FC, ReactNode } from "react";
-import { CylonLoadingBar } from "./components";
+import { CylonLoadingBar, ErrorView, SkeletonList } from "./components";
 import { useLoadGlobalState } from "./providers/hooks";
 import { useGlobalState } from "./providers/GlobalStateProvider";
-import { ErrorView } from "./components/ErrorView";
-import { SkeletonList } from "./components/Skeletons/Skeletons";
 
 const Base: FC<{ children: ReactNode }> = ({ children }) => (
   <main>
