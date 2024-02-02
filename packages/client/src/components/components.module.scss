@@ -1,0 +1,62 @@
+$Mobile: 0px;
+$Tablet: 768px;
+$Desktop: 1280px;
+
+.list {
+  padding: 0;
+  margin: 5rem 0 2rem;
+
+  @media screen and (min-width: $Tablet) {
+    margin: 2rem 0;
+  }
+}
+
+.listItem {
+  list-style: none;
+
+  & + & {
+    margin-top: 3rem;
+  }
+
+  @media screen and (min-width: $Tablet) {
+    & + & {
+      margin-top: 1rem;
+    }
+  }
+}
+
+.editableRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: minmax(4rem, auto) 2rem;
+  column-gap: 1rem;
+  row-gap: 0.5rem;
+
+  textarea {
+    grid-column: 1/-1;
+  }
+  button[type="button"],
+  button[type="submit"],
+  input[type="button"],
+  input[type="submit"] {
+    min-width: 4rem;
+    grid-row: 2;
+  }
+
+  @media screen and (min-width: $Tablet) {
+    display: flex;
+    flex-wrap: nowrap;
+    column-gap: 1rem;
+    row-gap: 1rem;
+  }
+}
+
+.createForm {
+  margin-top: 3rem;
+
+  button[type='submit'] {
+    min-width: 4rem * 3 + 2rem;
+    grid-column: 1/-1;
+  }
+
+}

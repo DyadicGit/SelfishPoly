@@ -2,6 +2,9 @@ import React, { FC, ReactNode } from "react";
 import { CylonLoadingBar, ErrorView, SkeletonList } from "./components";
 import { useLoadGlobalState } from "./providers/hooks";
 import { useGlobalState } from "./providers/GlobalStateProvider";
+import { EditableListItem } from "./components/EditableListItem";
+import s from "./components/components.module.scss";
+import { CreationPanel } from "./components/CreationPanel";
 
 const Base: FC<{ children: ReactNode }> = ({ children }) => (
   <main>
@@ -30,9 +33,10 @@ function App() {
   return (
     <Base>
       <CylonLoadingBar />
-      <ul>
+      <CreationPanel />
+      <ul className={s.list}>
         {notes?.map((note) => (
-          <li key={note.id}>{note.text}</li>
+          <EditableListItem key={note.id} {...note}></EditableListItem>
         ))}
       </ul>
     </Base>

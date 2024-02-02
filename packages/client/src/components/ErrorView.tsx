@@ -5,9 +5,9 @@ export const ErrorView = () => {
   const { error } = useGlobalState();
 
   return (
-    <div>
+    <main>
       <h1>Something went wrong!</h1>
       {typeof error === "string" && <code>{error}</code>}
-    </div>
+    </main>
   );
 };

@@ -16,3 +16,13 @@ apiNotes.put("/api/note/:id", (req, res) => {
 
   res.json(databaseNotes.edit(req.params.id, body));
 });
+
+apiNotes.delete("/api/note/:id", (req, res) => {
+  res.json(databaseNotes.remove(req.params.id));
+});
+
+apiNotes.post("/api/note", (req, res) => {
+  const body = req.body;
+
+  res.json(databaseNotes.insert(body));
+});

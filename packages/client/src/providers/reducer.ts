@@ -9,6 +9,12 @@ type ErrListAction = E<"ERR_LIST">;
 type ReqEditAction = Q<"REQ_EDIT">;
 type ResEditAction = S<"RES_EDIT", Note[]>;
 type ErrEditAction = E<"ERR_EDIT">;
+type ReqDeleteAction = Q<"REQ_DELETE">;
+type ResDeleteAction = S<"RES_DELETE", Note[]>;
+type ErrDeleteAction = E<"ERR_DELETE">;
+type ReqNewAction = Q<"REQ_NEW">;
+type ResNewAction = S<"RES_NEW", Note[]>;
+type ErrNewAction = E<"ERR_NEW">;
 
 export type Action =
   | ReqListAction
@@ -16,7 +22,13 @@ export type Action =
   | ErrListAction
   | ReqEditAction
   | ResEditAction
-  | ErrEditAction;
+  | ErrEditAction
+  | ReqDeleteAction
+  | ResDeleteAction
+  | ErrDeleteAction
+  | ReqNewAction
+  | ResNewAction
+  | ErrNewAction;
 
 export type GlobalState = {
   isLoading: boolean;
@@ -49,6 +61,28 @@ export const reducer: Reducer<GlobalState, Action> = (
         ...state,
         isLoading: false,
         error: action.payload || "ERR_EDIT",
+      };
+
+    case "REQ_DELETE":
+      return { ...state, isLoading: true };
+    case "RES_DELETE":
+      return { ...state, isLoading: false, notes: action.payload };
+    case "ERR_DELETE":
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload || "ERR_NEW",
+      };
+
+    case "REQ_NEW":
+      return { ...state, isLoading: true };
+    case "RES_NEW":
+      return { ...state, isLoading: false, notes: action.payload };
+    case "ERR_NEW":
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload || "ERR_NEW",
       };
 
     default:
