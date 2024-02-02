@@ -35,7 +35,7 @@ export const useDispatchDeleteAction = () => {
 
   return (id: Note["id"]) => {
     dispatch({ type: "REQ_DELETE" });
-    apiDeleteNote(id)
+    return apiDeleteNote(id)
       .then((res) => dispatch({ type: "RES_DELETE", payload: res }))
       .catch(() => dispatch({ type: "ERR_DELETE" }));
   };
@@ -46,7 +46,7 @@ export const useDispatchNewAction = () => {
 
   return (note: Pick<Note, "text">) => {
     dispatch({ type: "REQ_NEW" });
-    apiNewNote(note)
+    return apiNewNote(note)
       .then((res) => dispatch({ type: "RES_NEW", payload: res }))
       .catch(() => dispatch({ type: "ERR_NEW" }));
   };

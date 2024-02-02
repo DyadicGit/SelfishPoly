@@ -36,6 +36,7 @@ export const EditableListItem: FC<Note> = ({ id, text: initText }) => {
           cols={50}
           readOnly={!isEditMode}
           defaultValue={initText}
+          minLength={6}
         ></textarea>
         <input hidden={true} name="id" readOnly={true} value={id} />
         <input

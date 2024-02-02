@@ -35,6 +35,7 @@ export const apiNewNote = (note: Pick<Note, "text">) => {
     method: "POST",
     headers: {
       accept: "application/json",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(note),
   }).then<Note[]>(resolve);
