@@ -6,6 +6,7 @@ import classnames from "classnames";
 export const CreationPanel: FC = () => {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
   const dispatchNewAction = useDispatchNewAction();
+
   const handleSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     if (event.target instanceof HTMLFormElement) {
@@ -28,6 +29,7 @@ export const CreationPanel: FC = () => {
         rows={3}
         cols={50}
         minLength={10}
+        required={true}
         placeholder="type in a new Poly note here..."
         ref={textAreaRef}
       ></textarea>
