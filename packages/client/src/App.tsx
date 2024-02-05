@@ -5,6 +5,7 @@ import { useGlobalState } from "./providers/GlobalStateProvider";
 import { EditableListItem } from "./components/EditableListItem";
 import s from "./components/components.module.scss";
 import { CreationPanel } from "./components/CreationPanel";
+import { ErrorResponse } from "./providers/utils";
 
 const Base: FC<{ children: ReactNode }> = ({ children }) => (
   <main>
@@ -18,7 +19,7 @@ function App() {
   const globalState = useGlobalState();
   const { notes, error, isLoading } = globalState;
 
-  if (error) {
+  if (error && typeof error === "string") {
     return <ErrorView />;
   }
 

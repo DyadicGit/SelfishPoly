@@ -7,6 +7,7 @@ import {
   apiNewNote,
 } from "./api-functions";
 import { Note } from "@poly/domain";
+import { ErrorResponse } from "./utils";
 
 export const useLoadGlobalState = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ export const useLoadGlobalState = () => {
     dispatch({ type: "REQ_LIST" });
     apiGetNotes()
       .then((list) => dispatch({ type: "RES_LIST", payload: list }))
-      .catch(() => dispatch({ type: "ERR_LIST" }));
+      .catch((err) => dispatch({ type: "ERR_LIST", payload: err }));
   }, [dispatch]);
 };
 
@@ -26,7 +27,7 @@ export const useDispatchEditAction = () => {
     dispatch({ type: "REQ_EDIT" });
     return apiEditNote(note)
       .then((res) => dispatch({ type: "RES_EDIT", payload: res }))
-      .catch(() => dispatch({ type: "ERR_EDIT" }));
+      .catch((err) => dispatch({ type: "ERR_EDIT", payload: err }));
   };
 };
 
@@ -37,7 +38,7 @@ export const useDispatchDeleteAction = () => {
     dispatch({ type: "REQ_DELETE" });
     return apiDeleteNote(id)
       .then((res) => dispatch({ type: "RES_DELETE", payload: res }))
-      .catch(() => dispatch({ type: "ERR_DELETE" }));
+      .catch((err) => dispatch({ type: "ERR_DELETE", payload: err }));
   };
 };
 
@@ -48,6 +49,6 @@ export const useDispatchNewAction = () => {
     dispatch({ type: "REQ_NEW" });
     return apiNewNote(note)
       .then((res) => dispatch({ type: "RES_NEW", payload: res }))
-      .catch(() => dispatch({ type: "ERR_NEW" }));
+      .catch((err) => dispatch({ type: "ERR_NEW", payload: err }));
   };
 };

@@ -1,4 +1,4 @@
-import { E, Q, S } from "./utils";
+import { E, ErrorResponse, Q, S } from "./utils";
 import { Reducer } from "react";
 import { Note } from "@poly/domain";
 
@@ -33,7 +33,7 @@ export type Action =
 export type GlobalState = {
   isLoading: boolean;
   notes: Note[];
-  error: string | null;
+  error: string | ErrorResponse | undefined | null;
 };
 
 export const reducer: Reducer<GlobalState, Action> = (
@@ -51,7 +51,7 @@ export const reducer: Reducer<GlobalState, Action> = (
     case "RES_EDIT":
     case "RES_DELETE":
     case "RES_NEW":
-      return { ...state, isLoading: false, notes: action.payload };
+      return { ...state, isLoading: false, notes: action.payload, error: null };
 
     case "ERR_LIST":
     case "ERR_EDIT":
