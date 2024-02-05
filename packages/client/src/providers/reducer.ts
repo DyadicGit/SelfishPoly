@@ -42,47 +42,25 @@ export const reducer: Reducer<GlobalState, Action> = (
 ): GlobalState => {
   switch (action.type) {
     case "REQ_LIST":
-      return { ...state, isLoading: true };
-    case "RES_LIST":
-      return { ...state, isLoading: false, notes: action.payload };
-    case "ERR_LIST":
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload || "ERR_LIST",
-      };
-
     case "REQ_EDIT":
-      return { ...state, isLoading: true };
-    case "RES_EDIT":
-      return { ...state, isLoading: false, notes: action.payload };
-    case "ERR_EDIT":
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload || "ERR_EDIT",
-      };
-
     case "REQ_DELETE":
-      return { ...state, isLoading: true };
-    case "RES_DELETE":
-      return { ...state, isLoading: false, notes: action.payload };
-    case "ERR_DELETE":
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload || "ERR_NEW",
-      };
-
     case "REQ_NEW":
       return { ...state, isLoading: true };
+
+    case "RES_LIST":
+    case "RES_EDIT":
+    case "RES_DELETE":
     case "RES_NEW":
       return { ...state, isLoading: false, notes: action.payload };
+
+    case "ERR_LIST":
+    case "ERR_EDIT":
+    case "ERR_DELETE":
     case "ERR_NEW":
       return {
         ...state,
         isLoading: false,
-        error: action.payload || "ERR_NEW",
+        error: action.payload || "ERROR_WITHOUT_DESCRIPTION",
       };
 
     default:
