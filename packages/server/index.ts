@@ -69,20 +69,21 @@ const extractUserId = (cookieString: string | undefined) => {
   return matchClientUID.exec(cookieString || "")?.[0] || "clientUID=FALLBACK;";
 };
 
-const websocketSessionMap = new Map();
+const clientsSessionMap = new Map();
 
 wsServer.on("connection", function (ws, request) {
   const userId = extractUserId(request.headers.cookie);
-  websocketSessionMap.set(userId, ws);
+  clientsSessionMap.set(userId, ws);
 
   ws.on("error", (err) => console.error("connect client, error: ", err));
 
   ws.on("message", function (message) {
     console.log(`Received message "${message}" from user ${userId}`);
-    // bind reducer here
+    // ping-pong back to web-app
+    clientsSessionMap.get(userId).send(`POLY ${message}`);
   });
 
   ws.on("close", function () {
-    websocketSessionMap.delete(userId);
+    clientsSessionMap.delete(userId);
   });
 });

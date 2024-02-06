@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEventHandler, useRef } from "react";
 import s from "./chat.module.scss";
 
 function initializeHandshakeID() {
@@ -29,17 +29,33 @@ socket.addEventListener("error", (event) => {
 const socketClose = () => socket.close();
 
 export const ChatBox = () => {
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+
+  const sendMessage: FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
+    if (event.target instanceof HTMLFormElement && textAreaRef.current) {
+      const message = new FormData(event.target).get("message");
+      if (typeof message === "string") {
+        socket.send(message);
+        textAreaRef.current.value = "";
+      }
+    }
+  };
+
   return (
     <aside className={s.chatBox}>
       <ol>
         <li>{"message here"}</li>
       </ol>
-      <footer>
-        <textarea cols={30} rows={4}></textarea>
-        <button onClick={() => socket.send("Client sent a message")}>
-          send
-        </button>
-      </footer>
+      <form onSubmit={sendMessage}>
+        <textarea
+          name="message"
+          cols={30}
+          rows={4}
+          ref={textAreaRef}
+        ></textarea>
+        <button>send</button>
+      </form>
     </aside>
   );
 };

@@ -3,6 +3,7 @@
 .chatBox {
   border: solid 1px black;
   width: 100%;
+  padding: 1rem;
 
   @include mediaTablet {
     max-width: 384px;
