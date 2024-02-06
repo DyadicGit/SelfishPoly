@@ -54,14 +54,35 @@ server.on("upgrade", function upgrade(request, socket, head) {
   wsServer.handleUpgrade(request, socket, head, function done(ws) {
     wsServer.emit("connection", ws, request);
 
-    ws.on("error", console.error);
+    ws.on("error", (err) =>
+      console.error("express server upgrade, error: ", err)
+    );
 
     ws.on("close", function () {
-      console.log("stopping client interval");
+      console.log("express server upgrade, close: ");
     });
+  });
+});
 
-    ws.on("message", (data) => {
-      console.log("received: %s", data);
-    });
+const extractUserId = (cookieString: string | undefined) => {
+  const matchClientUID = /(clientUID=)([\d\w-]+);?/;
+  return matchClientUID.exec(cookieString || "")?.[0] || "clientUID=FALLBACK;";
+};
+
+const websocketSessionMap = new Map();
+
+wsServer.on("connection", function (ws, request) {
+  const userId = extractUserId(request.headers.cookie);
+  websocketSessionMap.set(userId, ws);
+
+  ws.on("error", (err) => console.error("connect client, error: ", err));
+
+  ws.on("message", function (message) {
+    console.log(`Received message "${message}" from user ${userId}`);
+    // bind reducer here
+  });
+
+  ws.on("close", function () {
+    websocketSessionMap.delete(userId);
   });
 });

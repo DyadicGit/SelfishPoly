@@ -1,6 +1,15 @@
 import React from "react";
 import s from "./chat.module.scss";
 
+function initializeHandshakeID() {
+  if (!document.cookie.includes("clientUID")) {
+    const clientUID = window.crypto.randomUUID();
+    sessionStorage.setItem("clientUID", clientUID);
+    document.cookie = `clientUID=${clientUID}; SameSite=None; Secure`;
+  }
+}
+initializeHandshakeID();
+
 const socket = new WebSocket("ws://localhost:5000");
 
 socket.addEventListener("open", (event) => {
