@@ -1,0 +1,15 @@
+$Mobile: 0px;
+$Tablet: 768px;
+$Desktop: 1280px;
+
+@mixin mediaMobile {
+  @media screen and (min-width: $Mobile) { @content; }
+}
+
+@mixin mediaTablet {
+  @media screen and (min-width: $Tablet) { @content; }
+}
+
+@mixin mediaDesktop {
+  @media screen and (min-width: $Desktop) { @content; }
+}

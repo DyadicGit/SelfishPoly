@@ -1,0 +1,10 @@
+@import '../../components/mixins';
+
+.chatBox {
+  border: solid 1px black;
+  width: 100%;
+
+  @include mediaTablet {
+    max-width: 384px;
+  }
+}

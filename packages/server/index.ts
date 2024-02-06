@@ -1,6 +1,8 @@
 import express from "express";
 import { apiNotes } from "./src/apiNotes";
 
+import WebSocket from "ws";
+
 const app = express();
 const port = 5000;
 
@@ -38,6 +40,28 @@ app.get("/", (req, res) => {
 });
 app.use(apiNotes);
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`server started at http://localhost:${port}`);
+});
+
+const wsServer = new WebSocket.WebSocketServer({
+  noServer: true,
+});
+
+/** # Multiple servers sharing a single HTTP/S server
+ * @source https://www.npmjs.com/package/ws#simple-server*/
+server.on("upgrade", function upgrade(request, socket, head) {
+  wsServer.handleUpgrade(request, socket, head, function done(ws) {
+    wsServer.emit("connection", ws, request);
+
+    ws.on("error", console.error);
+
+    ws.on("close", function () {
+      console.log("stopping client interval");
+    });
+
+    ws.on("message", (data) => {
+      console.log("received: %s", data);
+    });
+  });
 });

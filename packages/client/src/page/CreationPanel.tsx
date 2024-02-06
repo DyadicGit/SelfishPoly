@@ -1,6 +1,6 @@
 import React, { FC, FormEventHandler, useEffect, useRef } from "react";
 import { useDispatchNewAction } from "../providers/hooks";
-import s from "./components.module.scss";
+import s from "./page.module.scss";
 import classnames from "classnames";
 import { useGlobalState } from "../providers/GlobalStateProvider";
 import { ErrorResponse } from "../providers/utils";

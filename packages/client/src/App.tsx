@@ -1,15 +1,16 @@
 import React, { FC, ReactNode } from "react";
-import { CylonLoadingBar, ErrorView, SkeletonList } from "./components";
+import { CylonLoadingBar, SkeletonList } from "./components";
 import { useLoadGlobalState } from "./providers/hooks";
 import { useGlobalState } from "./providers/GlobalStateProvider";
-import { EditableListItem } from "./components/EditableListItem";
-import s from "./components/components.module.scss";
-import { CreationPanel } from "./components/CreationPanel";
-import { ErrorResponse } from "./providers/utils";
+import { EditableListItem } from "./page/EditableListItem";
+import s from "./page/page.module.scss";
+import { CreationPanel } from "./page/CreationPanel";
+import { ErrorView } from "./page/ErrorView";
+import { ChatBox } from "./page/Chat/ChatBox";
 
 const Base: FC<{ children: ReactNode }> = ({ children }) => (
   <main>
-    <h1>SelfishPoly</h1>
+    <h1 hidden={true}>SelfishPoly</h1>
     {children}
   </main>
 );
@@ -40,6 +41,7 @@ function App() {
           <EditableListItem key={note.id} {...note}></EditableListItem>
         ))}
       </ul>
+      <ChatBox />
     </Base>
   );
 }

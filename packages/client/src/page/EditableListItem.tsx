@@ -11,7 +11,7 @@ import {
   useDispatchDeleteAction,
   useDispatchEditAction,
 } from "../providers/hooks";
-import s from "./components.module.scss";
+import s from "./page.module.scss";
 import { ErrorResponse } from "../providers/utils";
 
 export const EditableListItem: FC<Note> = ({ id, text: initText }) => {
