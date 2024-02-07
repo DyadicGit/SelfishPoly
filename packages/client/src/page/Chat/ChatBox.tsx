@@ -27,7 +27,7 @@ export const ChatBox = () => {
             {message}
             <span>
               sent: {sent}
-              {!!received && (<><br /> received: received</>)}
+              {!!received && (<><br /> received: {received}</>)}
             </span>
           </li>
         ))}
