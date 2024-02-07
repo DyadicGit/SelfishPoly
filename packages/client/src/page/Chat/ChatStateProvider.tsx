@@ -64,7 +64,7 @@ export const socket = new WebSocket("ws://localhost:5000");
 
 socket.addEventListener("open", (event) => {
   console.log("Connection established", event);
-  const hello = toMessage("Hello Server!");
+  const hello = toMessage("Says Hello !");
   socket.send(hello.toString());
 });
 socket.addEventListener("message", (event) => {
