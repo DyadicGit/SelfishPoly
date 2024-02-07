@@ -10,7 +10,7 @@ import { ChatBox } from "./page/Chat/ChatBox";
 
 const Base: FC<{ children: ReactNode }> = ({ children }) => (
   <main>
-    <h1 hidden={true}>SelfishPoly</h1>
+    <h1 hidden={false}>SelfishPoly</h1>
     {children}
   </main>
 );
