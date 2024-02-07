@@ -5,7 +5,7 @@ export type Q<T> = { type: T };
 export type S<T, P> = { type: T; payload: P };
 export type E<T> = { type: T; payload?: string | ErrorResponse };
 
-export type F<P = {}> = FC<{ children?: ReactNode } & P>;
+export type FCC<P = {}> = FC<{ children?: ReactNode } & P>;
 
 export class ErrorResponse extends Error {
   data: KnownError;

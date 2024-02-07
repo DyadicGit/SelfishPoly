@@ -2,6 +2,7 @@ import express from "express";
 import { apiNotes } from "./src/apiNotes";
 
 import WebSocket from "ws";
+import { Message } from "@poly/domain";
 
 const app = express();
 const port = 5000;
@@ -77,10 +78,13 @@ wsServer.on("connection", function (ws, request) {
 
   ws.on("error", (err) => console.error("connect client, error: ", err));
 
-  ws.on("message", function (message) {
-    console.log(`Received message "${message}" from user ${userId}`);
+  ws.on("message", function (rawData) {
+    const msg = Message.fromString(rawData);
+    console.log(`Received message "${msg.message}" from user ${userId}`);
     // ping-pong back to web-app
-    clientsSessionMap.get(userId).send(`POLY ${message}`);
+    clientsSessionMap
+      .get(userId)
+      .send(new Message(`POLY ${msg.message}`).toString());
   });
 
   ws.on("close", function () {

@@ -1,5 +1,5 @@
 import React, { createContext, Dispatch, useContext, useReducer } from "react";
-import { F } from "./utils";
+import { FCC } from "./utils";
 import { Action, GlobalState, reducer } from "./reducer";
 
 export const initState: GlobalState = {
@@ -13,7 +13,7 @@ const GlobalStateCtx = createContext<{
   dispatch: Dispatch<Action>;
 } | null>(null);
 
-export const GlobalStateProvider: F = ({ children }) => {
+export const GlobalStateProvider: FCC = ({ children }) => {
   const [globalState, dispatch] = useReducer(reducer, initState);
 
   return (

@@ -9,3 +9,15 @@
     max-width: 384px;
   }
 }
+.message {
+  display: grid;
+  grid-auto-flow: row;
+  font-size: 1.1rem;
+
+  span {
+    font-size: 0.65rem;
+  }
+  & + & {
+    margin-top: 0.5rem;
+  }
+}
