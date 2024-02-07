@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS
 app.use((req, res, next) => {
-  const ALLOWED_CORS_ORIGIN = "http://localhost:3000";
+  const ALLOWED_CORS_ORIGIN = "*";
   const cacheHours = 60; // 1 minute
 
   res.header("Access-Control-Allow-Origin", ALLOWED_CORS_ORIGIN || "*");
@@ -19,7 +19,7 @@ app.use((req, res, next) => {
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept"
   );
-  res.header("Access-Control-Allow-Credentials", "false");
+  res.header("Access-Control-Allow-Credentials", "true");
   res.header("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
   res.header("Access-Control-Max-Age", `${cacheHours}`);
   next();
