@@ -70,7 +70,7 @@ const extractUserId = (cookieString: string | undefined) => {
   return matchClientUID.exec(cookieString || "")?.[0] || "clientUID=FALLBACK;";
 };
 
-const clientsSessionMap = new Map();
+const clientsSessionMap = new Map<string, WebSocket>();
 
 wsServer.on("connection", function (ws, request) {
   const userId = extractUserId(request.headers.cookie);
@@ -82,9 +82,13 @@ wsServer.on("connection", function (ws, request) {
     const msg = Message.fromString(rawData);
     console.log(`Received message "${msg.message}" from user ${userId}`);
     // ping-pong back to web-app
-    clientsSessionMap
-      .get(userId)
-      .send(new Message(`POLY ${msg.message}`).toString());
+    const clientsWebsocketSession = clientsSessionMap.get(userId);
+    if (clientsWebsocketSession) {
+      clientsWebsocketSession.send(
+        new Message(`POLY ${msg.message}`).toString(),
+          err => console.error(`failed to send to userId ${userId}`,err)
+      );
+    }
   });
 
   ws.on("close", function () {
