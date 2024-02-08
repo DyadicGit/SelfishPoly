@@ -12,7 +12,7 @@ export const ChatBox = () => {
     if (event.target instanceof HTMLFormElement && textAreaRef.current) {
       const message = new FormData(event.target).get("message");
 
-      if (typeof message === "string") {
+      if (typeof message === "string" && !!message.trim()) {
         sendMessage(message);
         textAreaRef.current.value = "";
       }
@@ -21,17 +21,22 @@ export const ChatBox = () => {
   const lastMessageRef = useRef<HTMLLIElement>(null);
   useEffect(() => {
     lastMessageRef.current?.scrollIntoView();
-  }, [messages])
+  }, [messages]);
 
   return (
     <aside className={s.chatBox}>
       <ol className={s.messageList}>
-        {messages.map(({ message, time }, index) => (
-          <li key={index} className={s.message} ref={lastMessageRef}>
-            {message}
-            <span>{time}</span>
-          </li>
-        ))}
+        {messages.map(({ message, time }, index) => {
+          const date = new Date(time);
+          return (
+            <li key={index} className={s.message} ref={lastMessageRef}>
+              {message}
+              <span>
+                {date.toLocaleString()} {date.getMilliseconds()}ms
+              </span>
+            </li>
+          );
+        })}
       </ol>
       <form onSubmit={handleTextAreaSubmit} className={s.chatForm}>
         <textarea
