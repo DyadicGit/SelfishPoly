@@ -3,10 +3,17 @@
 .chatBox {
   border: solid 1px black;
   padding: 1rem;
+  box-sizing: border-box;
 
   @include mediaTablet {
     max-width: 384px;
   }
+}
+.messageList {
+  padding: 0;
+  max-height: 400px;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 .message {
   display: grid;
@@ -19,4 +26,9 @@
   & + & {
     margin-top: 0.5rem;
   }
+}
+.chatForm {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 1rem;
 }

@@ -17,8 +17,8 @@ export class Database<Entry extends BaseEntry> {
     return this.database.find((s) => s.id === id) || null;
   }
 
-  public insert(entry: Entry) {
-    this.database.push({ ...entry, id: randomUUID() });
+  public insert(entry: Omit<Entry, "id">) {
+    this.database.push({ ...entry, id: randomUUID() } as Entry);
     return this.database;
   }
 

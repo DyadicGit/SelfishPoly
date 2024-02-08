@@ -2,7 +2,7 @@ import express from "express";
 import { apiNotes } from "./src/apiNotes";
 
 import WebSocket from "ws";
-import { Message } from "@poly/domain";
+import { connectPolyChat } from "./src/polyChat";
 
 const app = express();
 const port = 5000;
@@ -45,9 +45,7 @@ const server = app.listen(port, () => {
   console.log(`server started at http://localhost:${port}`);
 });
 
-const wsServer = new WebSocket.WebSocketServer({
-  noServer: true,
-});
+const wsServer = new WebSocket.WebSocketServer({ noServer: true });
 
 /** # Multiple servers sharing a single HTTP/S server
  * @source https://www.npmjs.com/package/ws#simple-server*/
@@ -65,33 +63,4 @@ server.on("upgrade", function upgrade(request, socket, head) {
   });
 });
 
-const extractUserId = (cookieString: string | undefined) => {
-  const matchClientUID = /(clientUID=)([\d\w-]+);?/;
-  return matchClientUID.exec(cookieString || "")?.[0] || "clientUID=FALLBACK;";
-};
-
-const clientsSessionMap = new Map<string, WebSocket>();
-
-wsServer.on("connection", function (ws, request) {
-  const userId = extractUserId(request.headers.cookie);
-  clientsSessionMap.set(userId, ws);
-
-  ws.on("error", (err) => console.error("connect client, error: ", err));
-
-  ws.on("message", function (rawData) {
-    const msg = Message.fromString(rawData);
-    console.log(`Received message "${msg.message}" from user ${userId}`);
-    // ping-pong back to web-app
-    const clientsWebsocketSession = clientsSessionMap.get(userId);
-    if (clientsWebsocketSession) {
-      clientsWebsocketSession.send(
-        new Message(`POLY ${msg.message}`).toString(),
-          err => console.error(`failed to send to userId ${userId}`,err)
-      );
-    }
-  });
-
-  ws.on("close", function () {
-    clientsSessionMap.delete(userId);
-  });
-});
+wsServer.on("connection", connectPolyChat);

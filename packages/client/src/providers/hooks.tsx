@@ -1,13 +1,7 @@
 import { useDispatch } from "./GlobalStateProvider";
 import { useEffect } from "react";
-import {
-  apiDeleteNote,
-  apiEditNote,
-  apiGetNotes,
-  apiNewNote,
-} from "./api-functions";
+import { apiDeleteNote, apiEditNote, apiGetNotes, apiNewNote, } from "./api-functions";
 import { Note } from "@poly/domain";
-import { ErrorResponse } from "./utils";
 
 export const useLoadGlobalState = () => {
   const dispatch = useDispatch();
