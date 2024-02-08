@@ -41,8 +41,7 @@ export const connectPolyChat = (ws: WebSocket, request: IncomingMessage) => {
           type: "GREETINGS",
           payload: {
             message: `Hello I am Poly !`,
-            received: "",
-            sent: new Date().toISOString(),
+            time: new Date().toISOString(),
           },
         });
         break;
@@ -53,8 +52,7 @@ export const connectPolyChat = (ws: WebSocket, request: IncomingMessage) => {
           type: "TO_CLIENT",
           payload: {
             message: `POLY ${actionFromClient.payload.message}`,
-            received: "",
-            sent: new Date().toISOString(),
+            time: new Date().toISOString(),
           },
         });
         break;

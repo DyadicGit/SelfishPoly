@@ -1,4 +1,9 @@
-import { dispatchHandshakeAction, dispatchIncomingAction, dispatchLoadHistoryAction } from "./actions";
+import {
+  dispatchPongHandshakeAction,
+  dispatchIncomingAction,
+  dispatchLoadHistoryAction,
+  dispatchPingHandshakeAction
+} from "./actions";
 import { ChatAction } from "@poly/domain";
 
 function initializeClientID() {
@@ -16,7 +21,7 @@ export const socket = new WebSocket("ws://localhost:5000");
 function incomingActionsOrchestrator(actionFromServer: ChatAction) {
   switch (actionFromServer.type) {
     case "GREETINGS":
-      return dispatchHandshakeAction(actionFromServer.payload.message);
+      return dispatchPongHandshakeAction(actionFromServer.payload);
     case "LOAD_HISTORY":
       return dispatchLoadHistoryAction(actionFromServer.payload);
     case "TO_CLIENT":
@@ -28,7 +33,7 @@ function incomingActionsOrchestrator(actionFromServer: ChatAction) {
 
 socket.addEventListener("open", (event) => {
   console.log("Connection established", event);
-  socket.send(JSON.stringify(dispatchHandshakeAction("Hello Poly, I'm client.")));
+  socket.send(JSON.stringify(dispatchPingHandshakeAction("Hello Poly, I'm client.")));
 });
 socket.addEventListener("message", (event) => {
   const actionFromServer: ChatAction = JSON.parse(event.data);

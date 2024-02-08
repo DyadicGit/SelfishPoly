@@ -12,6 +12,5 @@ export type ChatAction =
 
 export type Message = {
   message: string;
-  received: string;
-  sent: string;
+  time: string;
 };

@@ -1,4 +1,4 @@
-import React, { FormEventHandler, useRef } from "react";
+import React, { FormEventHandler, useEffect, useRef } from "react";
 import s from "./chat.module.scss";
 import { useChat } from "./ChatProvider/ChatProvider";
 
@@ -18,25 +18,18 @@ export const ChatBox = () => {
       }
     }
   };
+  const lastMessageRef = useRef<HTMLLIElement>(null);
+  useEffect(() => {
+    lastMessageRef.current?.scrollIntoView();
+  }, [messages])
 
   return (
     <aside className={s.chatBox}>
       <ol className={s.messageList}>
-        {messages.map(({ message, received, sent }, index) => (
-          <li
-            key={index}
-            className={s.message}
-            ref={(li) => index === messages.length - 1 && li?.scrollIntoView()}
-          >
+        {messages.map(({ message, time }, index) => (
+          <li key={index} className={s.message} ref={lastMessageRef}>
             {message}
-            <span>
-              sent: {sent}
-              {!!received && (
-                <>
-                  <br /> received: {received}
-                </>
-              )}
-            </span>
+            <span>{time}</span>
           </li>
         ))}
       </ol>
