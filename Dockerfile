@@ -1,4 +1,4 @@
-FROM node:18.17
+FROM node:18.17-alpine
 LABEL authors="DyadicG"
 
 ENV PORT=3000
