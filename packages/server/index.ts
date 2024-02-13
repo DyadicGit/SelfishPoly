@@ -5,7 +5,7 @@ import WebSocket from "ws";
 import { connectPolyChat } from "./src/polyChat";
 
 const app = express();
-const port = 5000;
+const port = Number(process.env.PORT) || 5000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -36,9 +36,18 @@ process.on("uncaughtException", (error) => {
   throw error;
 });
 
-app.get("/", (req, res) => {
-  res.send(`<h1>SelfishPoly server is running</h1>`);
-});
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static("./build"));
+  app.get("/health", (req, res) => {
+    res.sendStatus(200);
+  })
+}
+if (process.env.NODE_ENV !== 'production') {
+  app.get("/", (req, res) => {
+    res.send(`<h1>SelfishPoly server is running</h1>`);
+  });
+}
+
 app.use(apiNotes);
 
 const server = app.listen(port, () => {

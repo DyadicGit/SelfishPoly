@@ -4,6 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --config ./nodemon.json index.ts",
+    "serve": "ts-node index.ts",
     "debug": "nodemon --config ./nodemon.json --inspect-brk index.ts"
   },
   "keywords": [],

@@ -7,7 +7,9 @@ logs
 **/*.back.*
 
 node_modules
+build
 **/node_modules
+**/build
 bower_components
 *.sublime*
 

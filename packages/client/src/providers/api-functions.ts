@@ -1,7 +1,8 @@
 import { resolve } from "./utils";
 import { Note } from "@poly/domain";
+import { SERVER_PORT } from "./host";
 
-const HOST = "http://localhost:5000";
+const HOST = `http://localhost:${SERVER_PORT}`;
 
 export const apiGetNotes = () => {
   return fetch(`${HOST}/api/notes`, {

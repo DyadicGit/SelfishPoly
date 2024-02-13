@@ -8,7 +8,9 @@
   },
   "scripts": {
     "start:client": "npm run start --workspace @poly/client",
-    "start:server": "npm start -w @poly/server"
+    "start:server": "npm start -w @poly/server",
+    "build": "npm run build --workspace @poly/client",
+    "serve": "npm run serve -w @poly/server"
   },
   "keywords": [],
   "author": "",

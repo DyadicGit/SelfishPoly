@@ -5,6 +5,7 @@ import {
   dispatchPingHandshakeAction
 } from "./actions";
 import { ChatAction } from "@poly/domain";
+import { SERVER_PORT } from "../../../providers/host";
 
 function initializeClientID() {
   if (!document.cookie.includes("clientUID")) {
@@ -15,8 +16,8 @@ function initializeClientID() {
 }
 
 initializeClientID();
-
-export const socket = new WebSocket("ws://localhost:5000");
+const HOST = `ws://localhost:${SERVER_PORT}`
+export const socket = new WebSocket(HOST);
 
 function incomingActionsOrchestrator(actionFromServer: ChatAction) {
   switch (actionFromServer.type) {
