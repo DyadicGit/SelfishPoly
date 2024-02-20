@@ -1,6 +1,6 @@
-import React, { FormEventHandler, useEffect, useRef } from "react";
-import s from "./chat.module.scss";
-import { useChat } from "./ChatProvider/ChatProvider";
+import React, { FormEventHandler, useEffect, useRef } from 'react';
+import s from './chat.module.scss';
+import { useChat } from '../../providers/ChatProvider/ChatProvider';
 
 export const ChatBox = () => {
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
@@ -10,11 +10,11 @@ export const ChatBox = () => {
     event.preventDefault();
 
     if (event.target instanceof HTMLFormElement && textAreaRef.current) {
-      const message = new FormData(event.target).get("message");
+      const message = new FormData(event.target).get('message');
 
-      if (typeof message === "string" && !!message.trim()) {
+      if (typeof message === 'string' && !!message.trim()) {
         sendMessage(message);
-        textAreaRef.current.value = "";
+        textAreaRef.current.value = '';
       }
     }
   };
@@ -45,7 +45,7 @@ export const ChatBox = () => {
           rows={4}
           ref={textAreaRef}
           onKeyDown={(event) => {
-            if (event.ctrlKey && event.key === "Enter") {
+            if (event.ctrlKey && event.key === 'Enter') {
               event.preventDefault();
               (event.target as HTMLTextAreaElement).form?.requestSubmit();
             }

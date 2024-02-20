@@ -1,12 +1,12 @@
-import React, { FC, ReactNode } from "react";
-import { CylonLoadingBar, SkeletonList } from "./components";
-import { useLoadGlobalState } from "./providers/hooks";
-import { useGlobalState } from "./providers/GlobalStateProvider";
-import { EditableListItem } from "./page/EditableListItem";
-import s from "./page/page.module.scss";
-import { CreationPanel } from "./page/CreationPanel";
-import { ErrorView } from "./page/ErrorView";
-import { ChatBox } from "./page/Chat/ChatBox";
+import React, { FC, ReactNode } from 'react';
+import { CylonLoadingBar, SkeletonList } from './components';
+import { useLoadGlobalState } from './providers/GlobalStateProvider/hooks';
+import { useGlobalState } from './providers/GlobalStateProvider/GlobalStateProvider';
+import { EditableListItem } from './page/EditableListItem';
+import s from './page/page.module.scss';
+import { CreationPanel } from './page/CreationPanel';
+import { ErrorView } from './page/ErrorView';
+import { ChatBox } from './page/Chat/ChatBox';
 
 const Base: FC<{ children: ReactNode }> = ({ children }) => (
   <main>
@@ -20,7 +20,7 @@ function App() {
   const globalState = useGlobalState();
   const { notes, error, isLoading } = globalState;
 
-  if (error && typeof error === "string") {
+  if (error && typeof error === 'string') {
     return <ErrorView />;
   }
 
@@ -36,11 +36,7 @@ function App() {
     <Base>
       <CylonLoadingBar />
       <CreationPanel />
-      <ul className={s.list}>
-        {notes?.map((note) => (
-          <EditableListItem key={note.id} {...note}></EditableListItem>
-        ))}
-      </ul>
+      <ul className={s.list}>{notes?.map((note) => <EditableListItem key={note.id} {...note}></EditableListItem>)}</ul>
       <ChatBox />
     </Base>
   );

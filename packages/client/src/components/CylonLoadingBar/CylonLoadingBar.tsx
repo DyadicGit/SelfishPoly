@@ -1,6 +1,6 @@
-import styles from "./CylonLoadingBar.module.scss";
-import { useGlobalState } from "../../providers/GlobalStateProvider";
-import { useEffect, useState } from "react";
+import styles from './CylonLoadingBar.module.scss';
+import { useGlobalState } from '../../providers/GlobalStateProvider/GlobalStateProvider';
+import { useEffect, useState } from 'react';
 
 export const CylonLoadingBar = () => {
   const { isLoading } = useGlobalState();

@@ -1,6 +1,6 @@
-import React, { createContext, Dispatch, useContext, useReducer } from "react";
-import { FCC } from "./utils";
-import { Action, GlobalState, reducer } from "./reducer";
+import React, { createContext, Dispatch, useContext, useReducer } from 'react';
+import { FCC } from '../utils';
+import { Action, GlobalState, reducer } from './reducer';
 
 export const initState: GlobalState = {
   isLoading: false,
@@ -16,11 +16,7 @@ const GlobalStateCtx = createContext<{
 export const GlobalStateProvider: FCC = ({ children }) => {
   const [globalState, dispatch] = useReducer(reducer, initState);
 
-  return (
-    <GlobalStateCtx.Provider value={{ globalState, dispatch }}>
-      {children}
-    </GlobalStateCtx.Provider>
-  );
+  return <GlobalStateCtx.Provider value={{ globalState, dispatch }}>{children}</GlobalStateCtx.Provider>;
 };
 
 export const useGlobalState = () => {
